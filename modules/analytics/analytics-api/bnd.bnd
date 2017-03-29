@@ -1,4 +1,6 @@
 Bundle-Name: Analytics Prototype API
 Bundle-SymbolicName: com.liferay.prototype.analytics
 Bundle-Version: 1.0.0
-Export-Package: com.liferay.prototype.analytics.processor
+Export-Package:\
+	com.liferay.prototype.analytics.processor,\
+	com.liferay.prototype.analytics.storage

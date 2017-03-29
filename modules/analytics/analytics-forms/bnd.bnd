@@ -6,6 +6,7 @@ Bundle-ClassPath:\
 	lib/commons-io.jar,\
 	lib/commons-lang.jar,\
 	lib/commons-logging.jar,\
+	lib/elasticsearch.jar,\
 	lib/hppc.jar,\
 	lib/jackson-core.jar,\
 	lib/jackson-dataformat-cbor.jar,\
@@ -25,19 +26,18 @@ Bundle-ClassPath:\
 	lib/lucene-queries.jar,\
 	lib/lucene-queryparser.jar,\
 	lib/lucene-sandbox.jar,\
-	lib/lucene-spatial.jar,\
 	lib/lucene-spatial-extras.jar,\
+	lib/lucene-spatial.jar,\
 	lib/lucene-spatial3d.jar,\
 	lib/lucene-suggest.jar,\
 	lib/netty.jar,\
 	lib/noggit.jar,\
-	lib/elasticsearch.jar,\
-	lib/transport.jar,\
-	lib/transport-netty3-client.jar,\
-	lib/transport-netty4-client.jar,\
 	lib/snakeyaml.jar,\
 	lib/spatial4j.jar,\
-	lib/t-digest.jar
+	lib/t-digest.jar,\
+	lib/transport-netty3-client.jar,\
+	lib/transport-netty4-client.jar,\
+	lib/transport.jar
 Bundle-Name: Analytics Prototype Forms Message Processor
 Bundle-SymbolicName: com.liferay.prototype.analytics.forms
 Bundle-Version: 1.0.0
