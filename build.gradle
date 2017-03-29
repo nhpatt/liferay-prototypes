@@ -1,0 +1,23 @@
+import groovy.io.FileType;
+
+allprojects {
+    apply plugin: "idea"
+}
+
+
+distBundle {
+    exclude "**/Source-formatter*.jar"
+}
+
+downloadBundle {
+    onlyIf {
+        String url = downloadBundle.src.toString()
+        File cachedFile = new File(downloadBundle.dest, url.substring(url.lastIndexOf("/") + 1))
+
+        if (cachedFile.exists()) {
+            return false
+        }
+
+        return true
+    }
+}
