@@ -3,5 +3,4 @@ Bundle-SymbolicName: com.liferay.prototype.analytics
 Bundle-Version: 1.0.0
 Export-Package:\
 	com.liferay.prototype.analytics.generator,\
-	com.liferay.prototype.analytics.processor,\
-	com.liferay.prototype.analytics.storage
+	com.liferay.prototype.analytics.processor

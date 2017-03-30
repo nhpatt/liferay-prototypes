@@ -67,4 +67,5 @@ dependencies {
 	compile group: "org.yaml", name: "snakeyaml", version: "1.15"
 	compile project(":modules:analytics:analytics-api")
 	compile project(":modules:analytics:analytics-data-binding")
+	compile project(":modules:analytics:analytics-storage")
 }
