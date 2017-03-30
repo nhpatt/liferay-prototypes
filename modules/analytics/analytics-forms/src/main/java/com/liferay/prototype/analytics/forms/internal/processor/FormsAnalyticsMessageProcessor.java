@@ -90,10 +90,11 @@ public class FormsAnalyticsMessageProcessor
 		JSONObject additionalInfo = jsonFactory.createJSONObject(
 			additionalInfoString);
 
+		indexableJSONObject.put("additionalInfo", additionalInfo);
+
 		indexableJSONObject.put("event", eventJSONObject.getString("event"));
 		indexableJSONObject.put(
 			"groupId", eventJSONObject.getString("groupId"));
-		indexableJSONObject.put("additionalInfo", additionalInfo);
 		indexableJSONObject.put(
 			"properties", eventJSONObject.getJSONObject("properties"));
 	}
