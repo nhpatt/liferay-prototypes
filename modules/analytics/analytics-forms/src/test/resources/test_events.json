@@ -1,0 +1,36 @@
+{
+	"messageFormat":"FORMS",
+	"applicationId":"OnlineBanking",
+	"channel":"mobile",
+	"context":{
+		"companyId":20202,
+		"languageId":"en_US",
+		"userId":20250,
+		"signedIn":true,
+		"deviceId":"android-nhpatt2",
+		"deviceType":"android"
+	},
+	"events":[
+		{
+			"properties":{
+				"elementId":"button 1",
+				"referrers":[]
+			},
+			"event":"view",
+			"timestamp":"2016-04-15T21:10:24.956+01",
+			"additionalInfo":"{time: 2}",
+			"groupId":20233
+		},
+		{
+			"properties":{
+				"entityType":"com.liferay.dynamic.data.list.model.DDLRecord",
+				"entityId":"31810",
+				"referrers":[]
+			},
+			"event":"form-submitted",
+			"timestamp":"2016-04-15T21:10:25.004Z",
+			"additionalInfo":"{time: 1000}",
+			"groupId":20233
+		}
+	]
+}
