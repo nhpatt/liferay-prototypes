@@ -1,4 +1,4 @@
-package com.liferay.prototype.analytics.web;
+package com.liferay.prototype.analytics.web.internal;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

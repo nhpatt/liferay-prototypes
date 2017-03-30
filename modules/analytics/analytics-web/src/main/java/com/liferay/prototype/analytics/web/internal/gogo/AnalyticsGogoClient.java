@@ -1,4 +1,4 @@
-package com.liferay.prototype.analytics.storage.elasticsearch.internal.gogo;
+package com.liferay.prototype.analytics.web.internal.gogo;
 
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.log.Log;
@@ -26,9 +26,9 @@ import org.osgi.service.component.annotations.Reference;
 		"osgi.command.function=generate", "osgi.command.function=load",
 		"osgi.command.scope=analytics"
 	},
-	service = FormsAnalyticsGogoClient.class
+	service = AnalyticsGogoClient.class
 )
-public class FormsAnalyticsGogoClient {
+public class AnalyticsGogoClient {
 
 	public void generate(int count) {
 		for (int i = 0; i < count; i++) {
@@ -66,7 +66,7 @@ public class FormsAnalyticsGogoClient {
 	protected JSONObjectMapper<AnalyticsEvents> jsonObjectMapper;
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		FormsAnalyticsGogoClient.class);
+		AnalyticsGogoClient.class);
 
 	@Reference(
 		target = "(model=com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents)"
