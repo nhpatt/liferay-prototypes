@@ -2,10 +2,8 @@ package com.liferay.prototype.analytics.storage.elasticsearch.internal.storage;
 
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Props;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -13,6 +11,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.prototype.analytics.storage.AnalyticsMessageStorage;
 import com.liferay.prototype.analytics.storage.elasticsearch.internal.configuration.ElasticsearchAnalyticsMessageStorageConfiguration;
+import com.liferay.prototype.analytics.storage.stubs.StoredAnalyticsEvent;
 
 import java.net.InetAddress;
 
@@ -48,26 +47,28 @@ import org.osgi.service.component.annotations.Reference;
  * @author Michael C. Han
  */
 @Component(
-	configurationPid ="com.liferay.prototype.analytics.forms.internal.configuration.ElasticsearchAnalyticsMessageStorageConfiguration",
+	configurationPid = "com.liferay.prototype.analytics.forms.internal.configuration.ElasticsearchAnalyticsMessageStorageConfiguration",
 	immediate = true, service = AnalyticsMessageStorage.class
 )
 public class ElasticsearchAnalyticsMessageStorage
-	implements AnalyticsMessageStorage {
+	implements AnalyticsMessageStorage<StoredAnalyticsEvent> {
 
 	@Override
-	public void store(Collection<JSONObject> jsonObjects)
+	public void store(Collection<StoredAnalyticsEvent> storedAnalyticsEvents)
 		throws PortalException {
 
 		try {
 			BulkRequestBuilder bulkRequestBuilder =
 				transportClient.prepareBulk();
 
-			for (JSONObject jsonObject : jsonObjects) {
+			for (StoredAnalyticsEvent storedAnalyticsEvent :
+					storedAnalyticsEvents) {
+
 				IndexRequestBuilder indexRequestBuilder =
 					transportClient.prepareIndex(getIndexName(), "analytics");
 
 				indexRequestBuilder.setSource(
-					jsonObject.toString(), XContentType.JSON);
+					storedAnalyticsEvent.toString(), XContentType.JSON);
 
 				bulkRequestBuilder.add(indexRequestBuilder);
 			}
@@ -77,31 +78,37 @@ public class ElasticsearchAnalyticsMessageStorage
 			LogUtil.logActionResponse(_log, bulkResponse);
 		}
 		catch (Exception e) {
-			throw new SearchException("Unable to insert data" + jsonObjects, e);
+			throw new PortalException(
+				"Unable to insert data" + storedAnalyticsEvents, e);
 		}
 	}
 
 	@Override
-	public void store(JSONObject jsonObject) throws PortalException {
+	public void store(StoredAnalyticsEvent storedAnalyticsEvent)
+		throws PortalException {
+
 		try {
 			IndexRequestBuilder indexRequestBuilder =
 				transportClient.prepareIndex(getIndexName(), "analytics");
 
 			indexRequestBuilder.setSource(
-				jsonObject.toString(), XContentType.JSON);
+				storedAnalyticsEvent.toString(), XContentType.JSON);
 
 			IndexResponse indexResponse = indexRequestBuilder.get();
 
 			LogUtil.logActionResponse(_log, indexResponse);
 		}
 		catch (Exception e) {
-			throw new SearchException("Unable to insert data" + jsonObject, e);
+			throw new PortalException(
+				"Unable to insert data" + storedAnalyticsEvent, e);
 		}
 	}
 
 	@Override
-	public void store(JSONObject... jsonObjects) throws PortalException {
-		store(Arrays.asList(jsonObjects));
+	public void store(StoredAnalyticsEvent... storedAnalyticsEvent)
+		throws PortalException {
+
+		store(Arrays.asList(storedAnalyticsEvent));
 	}
 
 	@Activate
