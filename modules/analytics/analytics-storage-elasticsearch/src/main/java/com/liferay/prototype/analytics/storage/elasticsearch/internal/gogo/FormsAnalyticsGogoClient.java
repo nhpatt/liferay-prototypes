@@ -1,4 +1,4 @@
-package com.liferay.prototype.analytics.forms.internal.gogo;
+package com.liferay.prototype.analytics.storage.elasticsearch.internal.gogo;
 
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;

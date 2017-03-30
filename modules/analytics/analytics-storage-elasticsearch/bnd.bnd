@@ -57,8 +57,8 @@ Bundle-ClassPath:\
 	lib/transport-netty3-client.jar,\
 	lib/transport-netty4-client.jar,\
 	lib/transport.jar
-Bundle-Name: Analytics Prototype Forms Message Processor
-Bundle-SymbolicName: com.liferay.prototype.analytics.forms
+Bundle-Name: Analytics Prototype Storage Elasticsearch
+Bundle-SymbolicName: com.liferay.prototype.analytics.storage.elasticsearch
 Bundle-Version: 1.0.0
 Import-Package:\
 	!com.beust.jcommander.*,\

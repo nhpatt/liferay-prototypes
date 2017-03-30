@@ -1,4 +1,4 @@
-package com.liferay.prototype.analytics.forms.internal.storage;
+package com.liferay.prototype.analytics.storage.elasticsearch.internal.storage;
 
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -11,7 +11,7 @@ import com.liferay.portal.kernel.util.Props;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.prototype.analytics.forms.internal.configuration.ElasticsearchAnalyticsMessageStorageConfiguration;
+import com.liferay.prototype.analytics.storage.elasticsearch.internal.configuration.ElasticsearchAnalyticsMessageStorageConfiguration;
 import com.liferay.prototype.analytics.storage.AnalyticsMessageStorage;
 
 import java.net.InetAddress;
@@ -47,7 +47,10 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Michael C. Han
  */
-@Component(immediate = true, service = AnalyticsMessageStorage.class)
+@Component(
+	configurationPid ="com.liferay.prototype.analytics.forms.internal.configuration.ElasticsearchAnalyticsMessageStorageConfiguration",
+	immediate = true, service = AnalyticsMessageStorage.class
+)
 public class ElasticsearchAnalyticsMessageStorage
 	implements AnalyticsMessageStorage {
 

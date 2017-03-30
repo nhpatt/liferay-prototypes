@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.prototype.analytics.forms.internal.storage;
+package com.liferay.prototype.analytics.storage.elasticsearch.internal.storage;
 
 import com.liferay.portal.kernel.util.StringBundler;
 

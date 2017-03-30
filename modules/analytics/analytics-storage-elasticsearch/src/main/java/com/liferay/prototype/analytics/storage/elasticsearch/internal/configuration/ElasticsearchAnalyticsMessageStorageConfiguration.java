@@ -1,4 +1,4 @@
-package com.liferay.prototype.analytics.forms.internal.configuration;
+package com.liferay.prototype.analytics.storage.elasticsearch.internal.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 

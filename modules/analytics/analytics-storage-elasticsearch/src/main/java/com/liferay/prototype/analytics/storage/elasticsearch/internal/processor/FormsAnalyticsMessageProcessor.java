@@ -1,4 +1,4 @@
-package com.liferay.prototype.analytics.forms.internal.processor;
+package com.liferay.prototype.analytics.storage.elasticsearch.internal.processor;
 
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
