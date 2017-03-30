@@ -10,6 +10,7 @@
 			"latitude": 41.12,
 			"longitude": -71.34
 		},
+		"sessionId": "asdfasdfsdfsd",
 		"signedIn": true,
 		"userId": 20250
 	},
@@ -42,3 +43,5 @@
 	],
 	"messageFormat": "FORMS"
 }
+//form-enter, form-submit, form-leave, form-cancel, form-field-enter,
+//form-field-leave, form-field-exhaust

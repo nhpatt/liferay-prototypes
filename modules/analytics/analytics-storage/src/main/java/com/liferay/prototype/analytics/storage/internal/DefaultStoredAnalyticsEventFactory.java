@@ -59,7 +59,6 @@ public class DefaultStoredAnalyticsEventFactory
 				analyticsEvents.getMessageFormat());
 
 			storedAnalyticsEvent.setProperties(convert(event.getProperties()));
-
 			storedAnalyticsEvent.setTimestamp(event.getTimestamp());
 		}
 
@@ -92,6 +91,7 @@ public class DefaultStoredAnalyticsEventFactory
 		storedContext.setDeviceId(context.getDeviceId());
 		storedContext.setLanguageId(context.getLanguageId());
 		storedContext.setSignedIn(context.getSignedIn());
+		storedContext.setSessionId(context.getSessionId());
 		storedContext.setUserId(context.getUserId());
 
 		storedContext.setLocation(convert(context.getLocation()));
