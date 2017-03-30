@@ -8,6 +8,7 @@ import com.liferay.prototype.analytics.data.binding.JSONObjectMapper;
 import com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
 
 import org.osgi.service.component.annotations.Component;
@@ -36,6 +37,16 @@ public class AnalyticsEventsJSONObjectMapper
 
 			return stringWriter.toString();
 		}
+	}
+
+	@Override
+	public AnalyticsEvents convert(InputStream inputStream) throws IOException {
+		ObjectMapper mapper = createObjectMapper();
+
+		AnalyticsEvents analyticsEvents = mapper.readValue(
+			inputStream, AnalyticsEvents.class);
+
+		return analyticsEvents;
 	}
 
 	public AnalyticsEvents convert(String analyticsEventsJson)
