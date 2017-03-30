@@ -20,7 +20,7 @@ public interface ElasticsearchAnalyticsMessageStorageConfiguration {
 	@Meta.AD(deflt = "analytics-", required = false)
 	public String indexNamePrefix();
 
-	@Meta.AD(deflt = "localhost:9300", required = false)
+	@Meta.AD(deflt = "localhost:9353", required = false)
 	public String[] transportAddresses();
 
 	@Meta.AD(deflt = "true", required = false)
