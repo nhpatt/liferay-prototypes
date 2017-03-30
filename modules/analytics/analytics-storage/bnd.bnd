@@ -1,4 +1,4 @@
-Bundle-Name: Analytics Storage
+Bundle-Name: Analytics Prototype Storage
 Bundle-SymbolicName: com.liferay.prototype.analytics.storage
 Bundle-Version: 1.0.0
 Export-Package:\

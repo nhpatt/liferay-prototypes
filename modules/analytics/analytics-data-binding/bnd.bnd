@@ -1,4 +1,4 @@
-Bundle-Name: Analytics Data Binding
+Bundle-Name: Analytics Prototype Data Binding
 Bundle-SymbolicName: com.liferay.prototype.analytics.data.binding
 Bundle-Version: 1.0.0
 Export-Package:\
