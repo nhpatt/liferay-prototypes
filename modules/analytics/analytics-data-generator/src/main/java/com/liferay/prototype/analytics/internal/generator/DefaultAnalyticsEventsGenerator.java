@@ -300,7 +300,7 @@ public class DefaultAnalyticsEventsGenerator
 	protected PortalUUID portalUUID;
 
 	private static final String _DATE_FORMAT_STRING =
-		"yyyy-MM-dd'T'HH:mm:ss.SSSZ";
+		"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
 	private volatile AnalyticsEventsGeneratorConfiguration
 		_analyticsEventsGeneratorConfiguration;

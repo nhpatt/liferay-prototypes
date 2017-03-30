@@ -209,7 +209,7 @@ public class ElasticsearchAnalyticsMessageStorage
 	}
 
 	protected String getIndexName() {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.mm.dd");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
 
 		return
 			_elasticsearchAnalyticsMessageStorageConfiguration.

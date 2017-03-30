@@ -73,9 +73,7 @@ public class AnalyticsGogoClient {
 	)
 	private AnalyticsEventsGenerator<AnalyticsEvents> _analyticsEventsGenerator;
 
-	@Reference(
-		target = "(model=com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents)"
-	)
+	@Reference(target = "(messageFormat=FORMS)")
 	private AnalyticsMessageProcessor<AnalyticsEvents>
 		_analyticsMessageProcessor;
 

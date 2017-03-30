@@ -20,8 +20,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
     "deviceType",
     "languageId",
     "location",
-    "signedIn",
     "sessionId",
+    "signedIn",
     "userId"
 })
 public class Context {
@@ -36,10 +36,10 @@ public class Context {
     private String languageId;
     @JsonProperty("location")
     private Location location;
-    @JsonProperty("signedIn")
-    private Boolean signedIn;
     @JsonProperty("sessionId")
     private String sessionId;
+    @JsonProperty("signedIn")
+    private Boolean signedIn;
     @JsonProperty("userId")
     private Integer userId;
     @JsonIgnore
@@ -148,26 +148,6 @@ public class Context {
     /**
      * 
      * @return
-     *     The signedIn
-     */
-    @JsonProperty("signedIn")
-    public Boolean getSignedIn() {
-        return signedIn;
-    }
-
-    /**
-     * 
-     * @param signedIn
-     *     The signedIn
-     */
-    @JsonProperty("signedIn")
-    public void setSignedIn(Boolean signedIn) {
-        this.signedIn = signedIn;
-    }
-
-    /**
-     * 
-     * @return
      *     The sessionId
      */
     @JsonProperty("sessionId")
@@ -183,6 +163,26 @@ public class Context {
     @JsonProperty("sessionId")
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    /**
+     * 
+     * @return
+     *     The signedIn
+     */
+    @JsonProperty("signedIn")
+    public Boolean getSignedIn() {
+        return signedIn;
+    }
+
+    /**
+     * 
+     * @param signedIn
+     *     The signedIn
+     */
+    @JsonProperty("signedIn")
+    public void setSignedIn(Boolean signedIn) {
+        this.signedIn = signedIn;
     }
 
     /**
@@ -222,7 +222,7 @@ public class Context {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(companyId).append(deviceId).append(deviceType).append(languageId).append(location).append(signedIn).append(sessionId).append(userId).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(companyId).append(deviceId).append(deviceType).append(languageId).append(location).append(sessionId).append(signedIn).append(userId).append(additionalProperties).toHashCode();
     }
 
     @Override
@@ -234,7 +234,7 @@ public class Context {
             return false;
         }
         Context rhs = ((Context) other);
-        return new EqualsBuilder().append(companyId, rhs.companyId).append(deviceId, rhs.deviceId).append(deviceType, rhs.deviceType).append(languageId, rhs.languageId).append(location, rhs.location).append(signedIn, rhs.signedIn).append(sessionId, rhs.sessionId).append(userId, rhs.userId).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(companyId, rhs.companyId).append(deviceId, rhs.deviceId).append(deviceType, rhs.deviceType).append(languageId, rhs.languageId).append(location, rhs.location).append(sessionId, rhs.sessionId).append(signedIn, rhs.signedIn).append(userId, rhs.userId).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }
