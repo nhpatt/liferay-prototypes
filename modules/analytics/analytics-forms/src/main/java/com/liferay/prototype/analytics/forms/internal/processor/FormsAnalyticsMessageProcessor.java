@@ -2,6 +2,7 @@ package com.liferay.prototype.analytics.forms.internal.processor;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
@@ -40,21 +41,22 @@ public class FormsAnalyticsMessageProcessor
 		List<JSONObject> analyticsEvents = new ArrayList<>(
 			eventsJSONArray.length());
 
-		for (int i = 0; i < eventsJSONArray.length(); i++) {
-			JSONObject indexableJSONObject = jsonFactory.createJSONObject();
-
-			analyticsEvents.add(indexableJSONObject);
-
-			JSONObject eventJSONObject = eventsJSONArray.getJSONObject(i);
-
-			String timestamp = eventJSONObject.getString("timestamp");
-
-			populateHeader(indexableJSONObject, analyticsPayload, timestamp);
-
-			populateMessageBody(indexableJSONObject, eventJSONObject);
-		}
-
 		try {
+			for (int i = 0; i < eventsJSONArray.length(); i++) {
+				JSONObject indexableJSONObject = jsonFactory.createJSONObject();
+
+				analyticsEvents.add(indexableJSONObject);
+
+				JSONObject eventJSONObject = eventsJSONArray.getJSONObject(i);
+
+				String timestamp = eventJSONObject.getString("timestamp");
+
+				populateHeader(
+					indexableJSONObject, analyticsPayload, timestamp);
+
+				populateMessageBody(indexableJSONObject, eventJSONObject);
+			}
+
 			analyticsMessageStorage.store(analyticsEvents);
 		}
 		catch (PortalException pe) {
@@ -79,9 +81,21 @@ public class FormsAnalyticsMessageProcessor
 	}
 
 	protected void populateMessageBody(
-		JSONObject indexableJSONObject, JSONObject eventJSONObject) {
+			JSONObject indexableJSONObject, JSONObject eventJSONObject)
+		throws JSONException {
 
-		indexableJSONObject.put("event", eventJSONObject.get("event"));
+		String additionalInfoString = eventJSONObject.getString(
+			"additionalInfo");
+
+		JSONObject additionalInfo = jsonFactory.createJSONObject(
+			additionalInfoString);
+
+		indexableJSONObject.put("event", eventJSONObject.getString("event"));
+		indexableJSONObject.put(
+			"groupId", eventJSONObject.getString("groupId"));
+		indexableJSONObject.put("additionalInfo", additionalInfo);
+		indexableJSONObject.put(
+			"properties", eventJSONObject.getJSONObject("properties"));
 	}
 
 	@Reference
