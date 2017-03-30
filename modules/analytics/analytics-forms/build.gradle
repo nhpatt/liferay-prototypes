@@ -66,4 +66,5 @@ dependencies {
 	compile group: "org.ow2.asm", name: "asm-commons", version: "4.1"
 	compile group: "org.yaml", name: "snakeyaml", version: "1.15"
 	compile project(":modules:analytics:analytics-api")
+	compile project(":modules:analytics:analytics-data-binding")
 }

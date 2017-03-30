@@ -1,13 +1,11 @@
 package com.liferay.prototype.analytics.web;
 
-import com.liferay.portal.kernel.json.JSONException;
-import com.liferay.portal.kernel.json.JSONFactory;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.prototype.analytics.data.binding.JSONObjectMapper;
+import com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents;
 import com.liferay.prototype.analytics.processor.AnalyticsMessageProcessor;
 
 import java.io.BufferedReader;
@@ -84,18 +82,10 @@ public class AnalyticsServlet extends HttpServlet {
 		String analyticsMessage = sb.toString();
 
 		try {
-			JSONObject jsonObject = _jsonFactory.createJSONObject(
-				analyticsMessage);
+			AnalyticsEvents analyticsEvents = jsonObjectMapper.convert(
+				httpServletRequest.getInputStream());
 
-			String messageFormat = jsonObject.getString("messageFormat");
-
-			if (Validator.isNull(messageFormat)) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No message format: " + analyticsMessage);
-				}
-
-				return;
-			}
+			String messageFormat = analyticsEvents.getMessageFormat();
 
 			AnalyticsMessageProcessor analyticsMessageProcessor =
 				_analyticsMessageProcessors.get(messageFormat);
@@ -108,22 +98,24 @@ public class AnalyticsServlet extends HttpServlet {
 				return;
 			}
 
-			analyticsMessageProcessor.processMessage(jsonObject);
+			analyticsMessageProcessor.processMessage(analyticsEvents);
 		}
-		catch (JSONException jsone) {
+		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Could not parse: " + analyticsMessage, jsone);
+				_log.warn("Could not parse: " + analyticsMessage, e);
 			}
 		}
 	}
+
+	@Reference(
+		target = "(model=com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents)"
+	)
+	protected JSONObjectMapper<AnalyticsEvents> jsonObjectMapper;
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		AnalyticsServlet.class);
 
 	private Map<String, AnalyticsMessageProcessor> _analyticsMessageProcessors =
 		new ConcurrentHashMap<>();
-
-	@Reference
-	private JSONFactory _jsonFactory;
 
 }

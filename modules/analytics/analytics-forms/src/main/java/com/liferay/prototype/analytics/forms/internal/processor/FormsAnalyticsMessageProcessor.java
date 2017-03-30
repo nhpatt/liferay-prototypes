@@ -1,16 +1,16 @@
 package com.liferay.prototype.analytics.forms.internal.processor;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents;
+import com.liferay.prototype.analytics.data.binding.stubs.Event;
 import com.liferay.prototype.analytics.processor.AnalyticsMessageProcessor;
 import com.liferay.prototype.analytics.storage.AnalyticsMessageStorage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
@@ -24,25 +24,22 @@ import org.osgi.service.component.annotations.Reference;
 	service = AnalyticsMessageProcessor.class
 )
 public class FormsAnalyticsMessageProcessor
-	implements AnalyticsMessageProcessor {
+	implements AnalyticsMessageProcessor<AnalyticsEvents> {
 
 	@Override
-	public void processMessage(JSONObject analyticsPayload) {
-		JSONArray eventsJSONArray = analyticsPayload.getJSONArray("events");
+	public void processMessage(AnalyticsEvents analyticsEvents) {
+		List<Event> events = analyticsEvents.getEvents();
 
-		if (eventsJSONArray.length() == 0) {
+		if (ListUtil.isEmpty(events)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("No events found");
 			}
 
 			return;
 		}
-
-		List<JSONObject> analyticsEvents = new ArrayList<>(
-			eventsJSONArray.length());
-
+/*
 		try {
-			for (int i = 0; i < eventsJSONArray.length(); i++) {
+			for (Event event : events) {
 				JSONObject indexableJSONObject = jsonFactory.createJSONObject();
 
 				analyticsEvents.add(indexableJSONObject);
@@ -63,7 +60,7 @@ public class FormsAnalyticsMessageProcessor
 			if (_log.isWarnEnabled()) {
 				_log.warn("Error storing events", pe);
 			}
-		}
+		}*/
 	}
 
 	protected void populateHeader(

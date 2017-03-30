@@ -1,12 +1,10 @@
 package com.liferay.prototype.analytics.processor;
 
-import com.liferay.portal.kernel.json.JSONObject;
-
 /**
  * @author Michael C. Han
  */
-public interface AnalyticsMessageProcessor {
+public interface AnalyticsMessageProcessor<T> {
 
-	public void processMessage(JSONObject jsonObject);
+	public void processMessage(T t);
 
 }
