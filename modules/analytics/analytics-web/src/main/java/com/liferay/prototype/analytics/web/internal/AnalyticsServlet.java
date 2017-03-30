@@ -104,8 +104,9 @@ public class AnalyticsServlet extends HttpServlet {
 
 			String messageFormat = analyticsEvents.getMessageFormat();
 
-			AnalyticsMessageProcessor analyticsMessageProcessor =
-				_analyticsMessageProcessors.get(messageFormat);
+			AnalyticsMessageProcessor<AnalyticsEvents>
+				analyticsMessageProcessor =
+					_analyticsMessageProcessors.get(messageFormat);
 
 			if (analyticsMessageProcessor == null) {
 				if (_log.isWarnEnabled()) {
@@ -132,7 +133,7 @@ public class AnalyticsServlet extends HttpServlet {
 	private static final Log _log = LogFactoryUtil.getLog(
 		AnalyticsServlet.class);
 
-	private Map<String, AnalyticsMessageProcessor> _analyticsMessageProcessors =
-		new ConcurrentHashMap<>();
+	private Map<String, AnalyticsMessageProcessor<AnalyticsEvents>>
+		_analyticsMessageProcessors = new ConcurrentHashMap<>();
 
 }
