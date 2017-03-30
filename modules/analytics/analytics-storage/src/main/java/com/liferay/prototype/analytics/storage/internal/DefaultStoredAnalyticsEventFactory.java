@@ -109,8 +109,8 @@ public class DefaultStoredAnalyticsEventFactory
 
 		Location storedLocation = new Location();
 
-		storedLocation.setLatitude(location.getLatitude());
-		storedLocation.setLongitude(location.getLongitude());
+		storedLocation.setLat(location.getLatitude());
+		storedLocation.setLon(location.getLongitude());
 
 		Map<String, Object> additionalProperties =
 			location.getAdditionalProperties();

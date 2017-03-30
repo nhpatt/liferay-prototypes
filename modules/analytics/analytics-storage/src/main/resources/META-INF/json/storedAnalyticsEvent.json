@@ -10,8 +10,8 @@
 		"deviceType": "android",
 		"languageId": "en_US",
 		"location": {
-			"latitude": 41.12,
-			"longitude": -71.34
+			"lat": 41.12,
+			"lon": -71.34
 		},
 		"signedIn": true,
 		"userId": 20250

@@ -15,56 +15,56 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "latitude",
-    "longitude"
+    "lat",
+    "lon"
 })
 public class Location {
 
-    @JsonProperty("latitude")
-    private Double latitude;
-    @JsonProperty("longitude")
-    private Double longitude;
+    @JsonProperty("lat")
+    private Double lat;
+    @JsonProperty("lon")
+    private Double lon;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
      * @return
-     *     The latitude
+     *     The lat
      */
-    @JsonProperty("latitude")
-    public Double getLatitude() {
-        return latitude;
+    @JsonProperty("lat")
+    public Double getLat() {
+        return lat;
     }
 
     /**
      * 
-     * @param latitude
-     *     The latitude
+     * @param lat
+     *     The lat
      */
-    @JsonProperty("latitude")
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
+    @JsonProperty("lat")
+    public void setLat(Double lat) {
+        this.lat = lat;
     }
 
     /**
      * 
      * @return
-     *     The longitude
+     *     The lon
      */
-    @JsonProperty("longitude")
-    public Double getLongitude() {
-        return longitude;
+    @JsonProperty("lon")
+    public Double getLon() {
+        return lon;
     }
 
     /**
      * 
-     * @param longitude
-     *     The longitude
+     * @param lon
+     *     The lon
      */
-    @JsonProperty("longitude")
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    @JsonProperty("lon")
+    public void setLon(Double lon) {
+        this.lon = lon;
     }
 
     @Override
@@ -84,7 +84,7 @@ public class Location {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(latitude).append(longitude).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(lat).append(lon).append(additionalProperties).toHashCode();
     }
 
     @Override
@@ -96,7 +96,7 @@ public class Location {
             return false;
         }
         Location rhs = ((Location) other);
-        return new EqualsBuilder().append(latitude, rhs.latitude).append(longitude, rhs.longitude).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(lat, rhs.lat).append(lon, rhs.lon).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

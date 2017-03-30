@@ -25,9 +25,6 @@
 		{
 			"template_geolocation": {
 				"mapping": {
-					"index": "not_analyzed",
-					"lat_lon": true,
-					"store": true,
 					"type": "geo_point"
 				},
 				"match": "*_geolocation"
@@ -35,10 +32,14 @@
 		}
 	],
 	"properties": {
+		"location": {
+			"type": "geo_point"
+		},
 		"userId": {
 			"index": "not_analyzed",
 			"store": "yes",
 			"type": "string"
 		}
+
 	}
 }
