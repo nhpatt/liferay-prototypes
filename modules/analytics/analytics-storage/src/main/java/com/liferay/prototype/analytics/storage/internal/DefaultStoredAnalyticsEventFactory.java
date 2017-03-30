@@ -42,6 +42,8 @@ public class DefaultStoredAnalyticsEventFactory
 			StoredAnalyticsEvent storedAnalyticsEvent =
 				new StoredAnalyticsEvent();
 
+			storedAnalyticsEvents.add(storedAnalyticsEvent);
+
 			storedAnalyticsEvent.setAdditionalInfo(
 				convert(event.getAdditionalInfo()));
 
@@ -69,6 +71,10 @@ public class DefaultStoredAnalyticsEventFactory
 		com.liferay.prototype.analytics.data.binding.stubs.AdditionalInfo
 			additionalInfo) {
 
+		if (additionalInfo == null) {
+			return null;
+		}
+
 		AdditionalInfo storageAdditionalInfo = new AdditionalInfo();
 
 		storageAdditionalInfo.setTime(additionalInfo.getTime());
@@ -84,6 +90,10 @@ public class DefaultStoredAnalyticsEventFactory
 
 	protected Context convert(
 		com.liferay.prototype.analytics.data.binding.stubs.Context context) {
+
+		if (context == null) {
+			return null;
+		}
 
 		Context storedContext = new Context();
 
@@ -107,6 +117,10 @@ public class DefaultStoredAnalyticsEventFactory
 	protected Location convert(
 		com.liferay.prototype.analytics.data.binding.stubs.Location location) {
 
+		if (location == null) {
+			return null;
+		}
+
 		Location storedLocation = new Location();
 
 		storedLocation.setLat(location.getLatitude());
@@ -123,6 +137,10 @@ public class DefaultStoredAnalyticsEventFactory
 	protected Properties convert(
 		com.liferay.prototype.analytics.data.binding.stubs.Properties
 			properties) {
+
+		if (properties == null) {
+			return null;
+		}
 
 		Properties storedProperties = new Properties();
 

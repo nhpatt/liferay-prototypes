@@ -9,6 +9,8 @@ import com.liferay.portal.kernel.util.Props;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.prototype.analytics.data.binding.JSONObjectMapper;
+import com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents;
 import com.liferay.prototype.analytics.storage.AnalyticsMessageStorage;
 import com.liferay.prototype.analytics.storage.elasticsearch.internal.configuration.ElasticsearchAnalyticsMessageStorageConfiguration;
 import com.liferay.prototype.analytics.storage.stubs.StoredAnalyticsEvent;
@@ -65,10 +67,12 @@ public class ElasticsearchAnalyticsMessageStorage
 					storedAnalyticsEvents) {
 
 				IndexRequestBuilder indexRequestBuilder =
-					transportClient.prepareIndex(getIndexName(), "analytics");
+					transportClient.prepareIndex(getIndexName(),
+						_ANALYTICS_TYPE);
 
 				indexRequestBuilder.setSource(
-					storedAnalyticsEvent.toString(), XContentType.JSON);
+					jsonObjectMapper.convert(storedAnalyticsEvent),
+					XContentType.JSON);
 
 				bulkRequestBuilder.add(indexRequestBuilder);
 			}
@@ -89,10 +93,11 @@ public class ElasticsearchAnalyticsMessageStorage
 
 		try {
 			IndexRequestBuilder indexRequestBuilder =
-				transportClient.prepareIndex(getIndexName(), "analytics");
+				transportClient.prepareIndex(getIndexName(), _ANALYTICS_TYPE);
 
 			indexRequestBuilder.setSource(
-				storedAnalyticsEvent.toString(), XContentType.JSON);
+				jsonObjectMapper.convert(storedAnalyticsEvent),
+				XContentType.JSON);
 
 			IndexResponse indexResponse = indexRequestBuilder.get();
 
@@ -186,7 +191,7 @@ public class ElasticsearchAnalyticsMessageStorage
 			getClass(), "/META-INF/mappings.json");
 
 		createIndexRequestBuilder.addMapping(
-			"analysis", mappings, XContentType.JSON);
+			_ANALYTICS_TYPE, mappings, XContentType.JSON);
 
 		Settings.Builder builder = Settings.builder();
 
@@ -232,7 +237,14 @@ public class ElasticsearchAnalyticsMessageStorage
 	@Reference
 	protected Props props;
 
+	@Reference(
+		target = "(model=com.liferay.prototype.analytics.storage.stubs.StoredAnalyticsEvent)"
+	)
+	protected JSONObjectMapper<StoredAnalyticsEvent> jsonObjectMapper;
+
 	protected TransportClient transportClient;
+
+	private static final String _ANALYTICS_TYPE = "analytics";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		ElasticsearchAnalyticsMessageStorage.class);
