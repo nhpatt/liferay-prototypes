@@ -11,8 +11,8 @@ import com.liferay.portal.kernel.util.Props;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.prototype.analytics.storage.elasticsearch.internal.configuration.ElasticsearchAnalyticsMessageStorageConfiguration;
 import com.liferay.prototype.analytics.storage.AnalyticsMessageStorage;
+import com.liferay.prototype.analytics.storage.elasticsearch.internal.configuration.ElasticsearchAnalyticsMessageStorageConfiguration;
 
 import java.net.InetAddress;
 

@@ -37,6 +37,7 @@ public class FormsAnalyticsMessageProcessor
 
 			return;
 		}
+
 /*
 		try {
 			for (Event event : events) {
