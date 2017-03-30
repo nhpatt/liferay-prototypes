@@ -1,9 +1,10 @@
 package com.liferay.prototype.analytics.storage.elasticsearch.internal.gogo;
 
 import com.liferay.portal.kernel.json.JSONFactory;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.prototype.analytics.data.binding.JSONObjectMapper;
+import com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents;
 import com.liferay.prototype.analytics.generator.AnalyticsEventsGenerator;
 import com.liferay.prototype.analytics.processor.AnalyticsMessageProcessor;
 
@@ -31,10 +32,10 @@ public class FormsAnalyticsGogoClient {
 
 	public void generate(int count) {
 		for (int i = 0; i < count; i++) {
-			JSONObject analyticsEvent =
+			AnalyticsEvents analyticsEvents =
 				_analyticsEventsGenerator.generateEvents();
 
-			_formsAnalyticsMessageProcessor.processMessage(analyticsEvent);
+			_analyticsMessageProcessor.processMessage(analyticsEvents);
 		}
 	}
 
@@ -48,10 +49,10 @@ public class FormsAnalyticsGogoClient {
 			String jsonString = null;
 
 			while ((jsonString = bufferedReader.readLine()) != null) {
-				JSONObject jsonObject = _jsonFactory.createJSONObject(
+				AnalyticsEvents analyticsEvents = jsonObjectMapper.convert(
 					jsonString);
 
-				_formsAnalyticsMessageProcessor.processMessage(jsonObject);
+				_analyticsMessageProcessor.processMessage(analyticsEvents);
 			}
 		}
 		catch (Exception e) {
@@ -59,14 +60,24 @@ public class FormsAnalyticsGogoClient {
 		}
 	}
 
+	@Reference(
+		target = "(model=com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents)"
+	)
+	protected JSONObjectMapper<AnalyticsEvents> jsonObjectMapper;
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		FormsAnalyticsGogoClient.class);
 
-	@Reference(target = "(messageFormat=FORMS)")
-	private AnalyticsEventsGenerator _analyticsEventsGenerator;
+	@Reference(
+		target = "(model=com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents)"
+	)
+	private AnalyticsEventsGenerator<AnalyticsEvents> _analyticsEventsGenerator;
 
-	@Reference(target = "(messageFormat=FORMS)")
-	private AnalyticsMessageProcessor _formsAnalyticsMessageProcessor;
+	@Reference(
+		target = "(model=com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents)"
+	)
+	private AnalyticsMessageProcessor<AnalyticsEvents>
+		_analyticsMessageProcessor;
 
 	@Reference
 	private JSONFactory _jsonFactory;
