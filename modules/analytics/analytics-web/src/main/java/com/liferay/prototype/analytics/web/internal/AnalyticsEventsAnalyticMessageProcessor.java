@@ -1,4 +1,4 @@
-package com.liferay.prototype.analytics.storage.elasticsearch.internal.processor;
+package com.liferay.prototype.analytics.web.internal;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -24,7 +24,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true, property = {"messageFormat=FORMS"},
 	service = AnalyticsMessageProcessor.class
 )
-public class FormsAnalyticsMessageProcessor
+public class AnalyticsEventsAnalyticMessageProcessor
 	implements AnalyticsMessageProcessor<AnalyticsEvents> {
 
 	@Override
@@ -60,6 +60,6 @@ public class FormsAnalyticsMessageProcessor
 	protected StoredAnalyticsEventFactory storedAnalyticsEventFactory;
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		FormsAnalyticsMessageProcessor.class);
+		AnalyticsEventsAnalyticMessageProcessor.class);
 
 }

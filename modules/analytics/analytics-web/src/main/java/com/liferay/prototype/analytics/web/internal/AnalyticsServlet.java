@@ -2,7 +2,6 @@ package com.liferay.prototype.analytics.web.internal;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.prototype.analytics.data.binding.JSONObjectMapper;
 import com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents;
@@ -46,21 +45,39 @@ public class AnalyticsServlet extends HttpServlet {
 		AnalyticsMessageProcessor analyticsMessageProcessor,
 		Map<String, Object> properties) {
 
-		String messageFormat = GetterUtil.getString(
-			properties.get("messageFormat"));
+		String[] messageFormats = null;
 
-		_analyticsMessageProcessors.put(
-			messageFormat, analyticsMessageProcessor);
+		if (properties.get("messageFormat") instanceof String) {
+			messageFormats =
+				new String[] {(String)properties.get("messageFormat")};
+		}
+		else {
+			messageFormats = (String[])properties.get("messageFormat");
+		}
+
+		for (String messageFormat : messageFormats) {
+			_analyticsMessageProcessors.put(
+				messageFormat, analyticsMessageProcessor);
+		}
 	}
 
 	protected void removeAnalyticsMessageProcessor(
 		AnalyticsMessageProcessor analyticsMessageProcessor,
 		Map<String, Object> properties) {
 
-		String messageFormat = GetterUtil.getString(
-			properties.get("messageFormat"));
+		String[] messageFormats = null;
 
-		_analyticsMessageProcessors.remove(messageFormat);
+		if (properties.get("messageFormat") instanceof String) {
+			messageFormats =
+				new String[] {(String)properties.get("messageFormat")};
+		}
+		else {
+			messageFormats = (String[])properties.get("messageFormat");
+		}
+
+		for (String messageFormat : messageFormats) {
+			_analyticsMessageProcessors.remove(messageFormat);
+		}
 	}
 
 	@Override
