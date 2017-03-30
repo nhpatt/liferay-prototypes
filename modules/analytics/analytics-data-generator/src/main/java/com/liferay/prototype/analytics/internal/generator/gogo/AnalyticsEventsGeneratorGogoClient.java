@@ -1,4 +1,4 @@
-package com.liferay.prototype.analytics.web.internal.gogo;
+package com.liferay.prototype.analytics.internal.generator.gogo;
 
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.log.Log;
@@ -26,16 +26,21 @@ import org.osgi.service.component.annotations.Reference;
 		"osgi.command.function=generate", "osgi.command.function=load",
 		"osgi.command.scope=analytics"
 	},
-	service = AnalyticsGogoClient.class
+	service = AnalyticsEventsGeneratorGogoClient.class
 )
-public class AnalyticsGogoClient {
+public class AnalyticsEventsGeneratorGogoClient {
 
 	public void generate(int count) {
-		for (int i = 0; i < count; i++) {
-			AnalyticsEvents analyticsEvents =
-				_analyticsEventsGenerator.generateEvents();
+		try {
+			for (int i = 0; i < count; i++) {
+				AnalyticsEvents analyticsEvents =
+					_analyticsEventsGenerator.generateEvents();
 
-			_analyticsMessageProcessor.processMessage(analyticsEvents);
+				_analyticsMessageProcessor.processMessage(analyticsEvents);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
@@ -66,7 +71,7 @@ public class AnalyticsGogoClient {
 	protected JSONObjectMapper<AnalyticsEvents> jsonObjectMapper;
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		AnalyticsGogoClient.class);
+		AnalyticsEventsGeneratorGogoClient.class);
 
 	@Reference(
 		target = "(model=com.liferay.prototype.analytics.data.binding.stubs.AnalyticsEvents)"
